@@ -1,1 +1,5 @@
-{"nama":"Randi Himawan","umur":"36","pekerjaan":"Programmer"}
+[
+  { "nama": "Randi Himawan", "umur": 36, "pekerjaan": "Programmer" },
+  { "nama": "Putri Swandayani", "umur": 35, "pekerjaan": "Dokter Umum" },
+  { "nama": "Muhammad Ilyas", "umur": 31, "pekerjaan": "Pilot" }
+]

@@ -1,6 +1,7 @@
 const { isUtf8 } = require("node:buffer");
 const fs = require("node:fs/promises");
 const { stdin } = require("node:process");
+const { json } = require("node:stream/consumers");
 
 // const jsonObject = {
 //   nama: "Randi Himawan",
@@ -41,10 +42,13 @@ const pertanyaan = async () => {
     const nama = await rl.question("Silahkan masukan nama Anda : ");
     const umur = await rl.question("Silahkan masukan umur Anda : ");
     const pekerjaan = await rl.question("Silahkan masukan pekerjaan Anda : ");
-    await saveFile({ nama, umur, pekerjaan });
-    console.log(`Data Berhasil di Simpan !`);
+    const dataKaryawan = { nama, umur, pekerjaan };
+    // --- Save data Kontak ketika sudah mengisi File
+    await saveFile(dataKaryawan);
+    // console.log(`Data Berhasil di Simpan !`);
     const dataLoad = await loadFile();
-    console.log(`Data Berhasil di Baca ! : ${dataLoad}`);
+    console.log(dataLoad);
+    // console.log(`Data Berhasil di Baca ! : ${JSON.stringify(dataLoad)}`);
   } catch (err) {
     console.log(err.message);
   } finally {
@@ -54,17 +58,16 @@ const pertanyaan = async () => {
 pertanyaan();
 
 async function saveFile(answer) {
-  const dataBuffer = await Buffer.from(JSON.stringify(answer));
-  fs.writeFile("../OPTION/data.json", dataBuffer);
+  const dataJSON = await loadFile();
+  answer.umur = parseInt(answer.umur);
+  dataJSON.push(answer);
+  const updateBuffer = await Buffer.from(JSON.stringify(dataJSON));
+  fs.writeFile("../OPTION/data.json", updateBuffer);
 }
 
 async function loadFile() {
-  const dataBuffer = await fs.readFile("../OPTION/data.json", "utf-8");
-  const data = await JSON.parse(dataBuffer);
-  if (!isNaN(data.umur)) {
-    data.umur = parseInt(data.umur);
-  } else {
-    console.log("Umur hanya boleh dalam bentuk Angka");
-  }
-  return data;
+  const dataJSON = await fs.readFile("../OPTION/data.json", "utf-8");
+  if (!dataJSON) return [];
+  const dataBuffer = JSON.parse(dataJSON);
+  return dataBuffer;
 }
