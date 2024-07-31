@@ -1,1 +1,4 @@
-[{"nama":"Randi Himawan","id":"127111222333","pekerjaan":"Programmer","noHP":"081211112222"},{"nama":"Putri Swandayani","id":"134555666","pekerjaan":"Dokter Umum","noHP":"082211112222"},{"nama":"Muhammad Ilyas","id":"171222333","pekerjaan":"Pilot","noHP":"081155558888"},{"nama":"Sadly Adhitama","id":"1322111222","pekerjaan":"Designer","noHP":"085211112222"}]
+[
+  { "nama": "Randi", "id": "127111000", "pekerjaan": "Programmer" },
+  { "nama": "Putri", "id": "1271112222", "pekerjaan": "Dokter Umum" }
+]

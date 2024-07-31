@@ -1,21 +1,41 @@
+const yargs = require("yargs");
 const { checkDir, saveFile, loadFile } = require("./system");
-const { pertanyaan, rl } = require("./questioner");
 
-const runAppContact = async () => {
-  try {
-    // check Directory tersedia apa tidak
+yargs.command(
+  "add",
+  "Menambahkan Kontak ke contact.json",
+  (yargs) => {
+    yargs.option("nama", {
+      alias: "n",
+      describe: "Nama Kontak",
+      type: "string",
+      demandOption: true,
+    });
+    yargs.option("id", {
+      alias: "id",
+      describe: "ID Anggota",
+      type: "string",
+      demandOption: true,
+    });
+    yargs.option("pekerjaan", {
+      alias: "p",
+      describe: "Nama Pekerjaan",
+      type: "string",
+      demandOption: false,
+    });
+    yargs.option("nohp", {
+      alias: "hp",
+      describe: "No Handphone",
+      type: "string",
+      demandOption: true,
+    });
+  },
+  async (argv) => {
+    const { nama, id, pekerjaan, noHp } = argv;
+    const buffer = { nama, id, pekerjaan, noHp };
     await checkDir();
-    //Jalankan Pertanyaan
-    const dataKaryawan = await pertanyaan();
-    //Ketika pertanyaan sudah di jawab, File akan mengUpdate ke file JSON
-    await saveFile(dataKaryawan);
-    //Ketika setelah di Save, ingin melihat semua isi dari JSON
-    const dataLoad = await loadFile();
-    console.log(dataLoad);
-  } catch (err) {
-    console.log(err.message);
-  } finally {
-    rl.close();
+    await saveFile(buffer);
   }
-};
-runAppContact();
+);
+
+yargs.parse();

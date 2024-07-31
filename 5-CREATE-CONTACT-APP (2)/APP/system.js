@@ -26,11 +26,17 @@ async function checkDir() {
 // Fungsi ketika pertanyaan sudah di Jawab dan Lekas di Simpan ke File Contact.Json
 async function saveFile(answer) {
   const dataJSON = await loadFile();
-  if (isNaN(answer.noHP)) throw new Error("No HP harus berupa Angka");
-  answer.noHP = "0" + parseInt(answer.noHP);
+  // check duplicate contact
+  const duplicate = dataJSON.find((data) => (data = answer));
+  if (duplicate) {
+    console.log("Contact Sudah Ada");
+    return false;
+  }
+
   dataJSON.push(answer);
   const updateBuffer = await Buffer.from(JSON.stringify(dataJSON));
   await fs.writeFile(dirFile, updateBuffer);
+  console.log("Data Anda sudah di Simpan");
 }
 
 // Fungsi ketika ingin memanggil/load dari isi File contact
