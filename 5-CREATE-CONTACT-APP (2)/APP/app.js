@@ -23,7 +23,7 @@ yargs.command(
       type: "string",
       demandOption: false,
     });
-    yargs.option("nohp", {
+    yargs.option("noHp", {
       alias: "hp",
       describe: "No Handphone",
       type: "string",
@@ -33,6 +33,7 @@ yargs.command(
   async (argv) => {
     const { nama, id, pekerjaan, noHp } = argv;
     const buffer = { nama, id, pekerjaan, noHp };
+    console.log(buffer);
     await checkDir();
     await saveFile(buffer);
   }

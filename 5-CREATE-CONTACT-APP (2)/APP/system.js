@@ -27,7 +27,9 @@ async function checkDir() {
 async function saveFile(answer) {
   const dataJSON = await loadFile();
   // check duplicate contact
-  const duplicate = dataJSON.find((data) => (data = answer));
+  const duplicate = dataJSON.find(
+    (data) => data.nama === answer.nama || data.id === answer.id
+  );
   if (duplicate) {
     console.log("Contact Sudah Ada");
     return false;
