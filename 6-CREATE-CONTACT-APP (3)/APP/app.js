@@ -1,5 +1,6 @@
 const yargs = require("yargs");
 const { checkDir, saveFile, loadFile } = require("./system");
+const { validate } = require("./validator");
 
 yargs.command(
   "add",
@@ -35,6 +36,7 @@ yargs.command(
     const buffer = { nama, id, pekerjaan, noHp };
     console.log(buffer);
     await checkDir();
+    await validate(buffer);
     await saveFile(buffer);
   }
 );
