@@ -40,8 +40,26 @@ async function loadFile() {
   return dataBuffer;
 }
 
+// Fungsi mencari contact di contact.json berdasarkan nama
+async function searchContact(nama) {
+  const contacts = await loadFile();
+  console.log("Searching for contact with name:", nama); // Debug log
+  const contact = contacts.filter((contact) =>
+    contact.nama.toLowerCase().includes(nama.toLowerCase())
+  );
+  if (contact.length > 0) {
+    console.log("Contact di temukan");
+    contact.forEach((n, i) => {
+      console.log(n);
+    });
+  } else {
+    console.log(chalk.red.bold("Kontak tidak ditemukan"));
+  }
+}
+
 module.exports = {
   checkDir,
   saveFile,
   loadFile,
+  searchContact,
 };

@@ -1,1 +1,20 @@
-[{"nama":"Randi Himawan","id":"127111000","pekerjaan":"Programmer","noHp":"081211112222"},{"nama":"Putri Swandayani","id":"1271112222","pekerjaan":"Dokter Umum","noHp":"082244445555"},{"nama":"Muhammad Ilyas","id":"128111222","pekerjaan":"Pilot","noHp":"085611115555"}]
+[
+  {
+    "nama": "Randi Himawan",
+    "id": "127111222333",
+    "pekerjaan": "Programmer",
+    "noHp": "081211112222"
+  },
+  {
+    "nama": "Randi Setiawan",
+    "id": "128999111",
+    "pekerjaan": "Programmer",
+    "noHp": "081588889999"
+  },
+  {
+    "nama": "Putri Swandayani",
+    "id": "12612345",
+    "pekerjaan": "Dokter",
+    "noHp": "082255556666"
+  }
+]

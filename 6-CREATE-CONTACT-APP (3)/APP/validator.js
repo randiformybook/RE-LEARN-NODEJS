@@ -5,7 +5,7 @@ const chalk = require("chalk");
 // validasi id
 async function validate(answer) {
   const id = answer.id;
-  if (validator.isNumeric(id) == false) {
+  if (validator.isNumeric(id) === false) {
     console.log(chalk.red.bold("ID harus berupa Angka"));
     return false;
   }
@@ -30,11 +30,12 @@ async function validate(answer) {
   if (duplicate) {
     console.log(
       chalk.red.bold(
-        "Contact yang anda masukin sudah terdaftar, Silahkan melakukan pengecekan ulang"
+        "Kontak yang anda masukin sudah terdaftar, Silahkan melakukan pengecekan ulang !"
       )
     );
     return false;
   }
+  return true;
 }
 
 module.exports = { validate };
