@@ -43,7 +43,7 @@ async function loadFile() {
 // Fungsi mencari contact di contact.json berdasarkan nama
 async function searchContact(nama) {
   const contacts = await loadFile();
-  console.log("Searching for contact with name:", nama); // Debug log
+  console.log("Searching for contact with nama:", nama); // Debug log
   const contact = contacts.filter((contact) =>
     contact.nama.toLowerCase().includes(nama.toLowerCase())
   );
