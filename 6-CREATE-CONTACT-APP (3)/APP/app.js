@@ -1,5 +1,12 @@
 const yargs = require("yargs");
-const { checkDir, saveFile, loadFile, searchContact } = require("./system");
+const {
+  checkDir,
+  saveFile,
+  loadFile,
+  searchContact,
+  listContact,
+  deleteContact,
+} = require("./system");
 const { validate } = require("./validator");
 const chalk = require("chalk");
 
@@ -43,17 +50,36 @@ yargs
   )
   .demandCommand();
 
-yargs.command("list", "Melihat Daftar Daftar Kontak", async () => {
-  const contacts = await loadFile();
-  console.log(chalk.bgCyan.bold(`Daftar Kontak : `));
-  contacts.forEach((contact, i) => {
-    console.log(`${i + 1}. ${contact.nama} - ${contact.noHp}`);
-  });
-});
+yargs.command("list", "Melihat Daftar Daftar Kontak", async () =>
+  listContact()
+);
 
 yargs.command(
   "find",
-  "Mencari Kontak yang sudah terdaftar berdasarkan Nama di Daftar Contact",
+  "Mencari Kontak yang sudah terdaftar berdasarkan Nama atau ID di Daftar Contact",
+  (yargs) => {
+    yargs.option("nama", {
+      alias: "n",
+      describe: "Nama Kontak",
+      type: "string",
+    });
+    yargs.option("id", {
+      alias: "id",
+      describe: "ID Anggota",
+      type: "string",
+    });
+  },
+  async (argv) => {
+    if (argv.nama || argv.id) {
+      await searchContact(argv.nama, argv.id);
+    } else if (argv) {
+      await listContact();
+    }
+  }
+);
+yargs.command(
+  "delete",
+  "Menghapus sebuah contact berdasarkan nama lengkap",
   (yargs) => {
     yargs.option("nama", {
       alias: "n",
@@ -63,7 +89,7 @@ yargs.command(
     });
   },
   async (argv) => {
-    await searchContact(argv.nama);
+    await deleteContact(argv.nama);
   }
 );
 

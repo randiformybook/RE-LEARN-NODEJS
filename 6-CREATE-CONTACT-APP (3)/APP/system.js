@@ -3,6 +3,7 @@ const fs = require("node:fs/promises");
 const dirPath = "../DATA";
 const dirFile = `${dirPath}/contact.json`;
 const chalk = require("chalk");
+const { array } = require("yargs");
 // ----------------------
 
 // Check & Create Directory Folder
@@ -40,14 +41,28 @@ async function loadFile() {
   return dataBuffer;
 }
 
-// Fungsi mencari contact di contact.json berdasarkan nama
-async function searchContact(nama) {
+async function listContact() {
   const contacts = await loadFile();
-  console.log("Searching for contact with nama:", nama); // Debug log
-  const contact = contacts.filter((contact) =>
-    contact.nama.toLowerCase().includes(nama.toLowerCase())
-  );
-  if (contact.length > 0) {
+  console.log(chalk.bgCyan.bold(`Daftar Kontak : `));
+  contacts.forEach((contact, i) => {
+    console.log(`${i + 1}. ${contact.nama} - ${contact.noHp}`);
+  });
+}
+
+// Fungsi mencari contact di contact.json berdasarkan nama
+async function searchContact(nama, id) {
+  const contacts = await loadFile();
+  let contact;
+  console.log("Mencari contact dengan", nama ? `nama ${nama}` : `ID:${id}`);
+  // Debug log
+  if (nama) {
+    contact = contacts.filter((contact) =>
+      contact.nama.toLowerCase().includes(nama.toLowerCase())
+    );
+  } else {
+    contact = contacts.filter((contact) => contact.id === id);
+  }
+  if (contact && contact.length > 0) {
     console.log("Contact di temukan");
     contact.forEach((n, i) => {
       console.log(n);
@@ -57,9 +72,32 @@ async function searchContact(nama) {
   }
 }
 
+async function deleteContact(nama) {
+  const contacts = await loadFile();
+  const oldContacts = contacts.length;
+  const newContact = await contacts.filter(
+    (contact) => contact.nama.toLowerCase() !== nama.toLowerCase()
+  );
+  if (oldContacts > newContact.length) {
+    const updateBuffer = await Buffer.from(JSON.stringify(newContact));
+    await fs.writeFile(dirFile, updateBuffer);
+    console.log(
+      chalk.greenBright.bold(
+        `Kontak yang berdasarkan Nama ${nama} sudah berhasil di Hapus!`
+      )
+    );
+  } else {
+    console.log(
+      chalk.red.bold(`Kontak berdasarkan nama ${nama} tidak ditemukan`)
+    );
+  }
+}
+
 module.exports = {
   checkDir,
   saveFile,
   loadFile,
   searchContact,
+  listContact,
+  deleteContact,
 };
