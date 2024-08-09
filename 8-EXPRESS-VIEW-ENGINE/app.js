@@ -10,7 +10,16 @@ app.set("view engine", "ejs");
 
 // Home Route
 app.get("/", (req, res) => {
-  res.render("home");
+  const karyawan = [
+    { id: 127, nama: "Randi", jabatan: "Junior Programmer" },
+    { id: 257, nama: "Putri", jabatan: "Dokter" },
+    { id: 337, nama: "Ilyas", jabatan: "Captain-Pilot" },
+  ];
+  res.render("index", {
+    title: "Home",
+    content: "Ini adalah HOMEPAGE, first of Page",
+    karyawan,
+  });
 });
 app.get("/about", (req, res) => {
   res.render("about");
