@@ -9,6 +9,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 
 // Home Route
+// -------Home Page Route---------
 app.get("/", (req, res) => {
   const karyawan = [
     { id: 127, nama: "Randi", jabatan: "Junior Programmer" },
@@ -16,14 +17,16 @@ app.get("/", (req, res) => {
     { id: 337, nama: "Ilyas", jabatan: "Captain-Pilot" },
   ];
   res.render("index", {
-    title: "Home",
+    title: "Halaman Home",
     content: "Ini adalah HOMEPAGE, first of Page",
     karyawan,
   });
 });
+// -------About Page Route---------
 app.get("/about", (req, res) => {
   res.render("about");
 });
+// -------Contact Page Route---------
 app.get("/contact", (req, res) => {
   res.render("contact");
 });
