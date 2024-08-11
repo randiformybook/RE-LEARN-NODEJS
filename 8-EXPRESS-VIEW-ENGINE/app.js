@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const { title } = require("process");
 
 // Menyajikan file statis dari folder 'public'
 app.use(express.static(path.join(__dirname, "public")));
@@ -24,11 +25,15 @@ app.get("/", (req, res) => {
 });
 // -------About Page Route---------
 app.get("/about", (req, res) => {
-  res.render("about");
+  res.render("about", {
+    title: "About",
+  });
 });
 // -------Contact Page Route---------
 app.get("/contact", (req, res) => {
-  res.render("contact");
+  res.render("contact", {
+    title: "Contact",
+  });
 });
 // Apabila halaman tidak di temukan
 app.use("/", (req, res) => {
