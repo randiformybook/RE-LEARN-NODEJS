@@ -8,15 +8,22 @@ body {
   background-size: cover;
   height: 100vh;
 }
+body .container {
+  padding-top: 60px;
+  margin: 50px;
+}
 
 header {
-  position: absolute;
+  /* position: absolute; */
+  position: fixed;
   background: #dedddd;
   top: 0;
   left: 0;
+  height: 60px;
   padding: 0 100px;
   width: 100%;
   box-sizing: border-box;
+  z-index: 999;
 }
 
 header .logo {
