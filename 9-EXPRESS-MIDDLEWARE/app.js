@@ -1,15 +1,28 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
-const path = require("path");
-const { title } = require("process");
+const morgan = require("morgan");
+// const path = require("path");
 
 // Menyajikan file statis dari folder 'public'
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static("public"));
 
 // gunakan ejs
 app.set("view engine", "ejs");
+
+// Third-party Middleware
+// ---> Express Layout
 app.use(expressLayouts);
+// ---> Request Time
+const requestTime = (req, res, next) => {
+  req.requestTime = Date.now();
+  console.log(req.requestTime);
+  next();
+};
+app.use(requestTime);
+
+// ---> Morgan
+app.use(morgan("dev"));
 
 // Home Route
 // -------Home Page Route---------
