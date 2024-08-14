@@ -1,6 +1,7 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
+const { checkDir, loadFile } = require("./utilities/contact-system");
 
 // Menyajikan file statis dari folder 'public'
 app.use(express.static("public"));
@@ -32,7 +33,8 @@ app.get("/about", (req, res) => {
   });
 });
 // -------Contact Page Route---------
-app.get("/contact", (req, res) => {
+app.get("/contact", async (req, res) => {
+  await checkDir();
   res.render("contact", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Contact",

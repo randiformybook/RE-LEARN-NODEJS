@@ -2,7 +2,6 @@ const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
 const path = require("path");
-const { title } = require("process");
 
 // Menyajikan file statis dari folder 'public'
 app.use(express.static(path.join(__dirname, "public")));
