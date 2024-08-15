@@ -1,7 +1,11 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
-const { checkDir, loadFile } = require("./utilities/contact-system");
+const {
+  checkDir,
+  loadFile,
+  findContact,
+} = require("./utilities/contact-system");
 
 // Menyajikan file statis dari folder 'public'
 app.use(express.static("public"));
@@ -35,9 +39,21 @@ app.get("/about", (req, res) => {
 // -------Contact Page Route---------
 app.get("/contact", async (req, res) => {
   await checkDir();
+  const contacts = await loadFile();
   res.render("contact", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Contact",
+    contacts,
+  });
+});
+// Contact Detail by ID
+app.get("/contact/:id", async (req, res) => {
+  const contact = await findContact(req.params.id);
+  console.log(contact);
+  res.render("detail-contact", {
+    layout: "layouts/main-layout.ejs",
+    title: "Halaman Detail Contact",
+    contact,
   });
 });
 // Apabila halaman tidak di temukan

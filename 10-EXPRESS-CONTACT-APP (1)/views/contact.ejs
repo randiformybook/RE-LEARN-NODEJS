@@ -10,24 +10,19 @@
     </tr>
   </thead>
   <tbody>
+    <% contacts.forEach((contact,i) => { %>
     <tr>
-      <td>1</td>
-      <td>Randi Himawan</td>
-      <td>081233334444</td>
-      <td>randi@email.com</td>
+      <td><%= i +=1 %></td>
+      <td><%= contact.nama %></td>
+      <td><%= contact.nohp %></td>
+      <td><%= contact.email %></td>
       <td>
-        <button class="button-28" type="button"><a href="/">Details</a></button>
+        <button class="button-28" type="button">
+          <a href="/contact/<%= contact.id %>">Details</a>
+        </button>
       </td>
     </tr>
-    <tr>
-      <td>2</td>
-      <td>Putri</td>
-      <td>082211113333</td>
-      <td>putri@email.com</td>
-      <td>
-        <button class="button-28" type="button"><a href="/">Details</a></button>
-      </td>
-    </tr>
+    <% }) %>
     <!-- <tr class="active-row">
       <td>Melissa</td>
       <td>5150</td>

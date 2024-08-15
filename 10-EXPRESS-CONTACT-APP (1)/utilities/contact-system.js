@@ -35,7 +35,15 @@ async function loadFile() {
   return dataBuffer;
 }
 
+async function findContact(id) {
+  const contacts = await loadFile();
+  const contactFind = await contacts.filter((contact) => contact.id == id);
+  const contact = contactFind[0];
+  return contact;
+}
+
 module.exports = {
   checkDir,
   loadFile,
+  findContact,
 };
