@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
   res.render("index", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Home",
+    cssLink: "/",
     karyawan,
   });
 });
@@ -34,6 +35,7 @@ app.get("/about", (req, res) => {
   res.render("about", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman About",
+    cssLink: "/",
   });
 });
 // -------Contact Page Route---------
@@ -43,16 +45,17 @@ app.get("/contact", async (req, res) => {
   res.render("contact", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Contact",
+    cssLink: "/",
     contacts,
   });
 });
 // Contact Detail by ID
 app.get("/contact/:id", async (req, res) => {
   const contact = await findContact(req.params.id);
-  console.log(contact);
-  res.render("detail-contact", {
+  res.render("contact-detail", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Detail Contact",
+    cssLink: "/css/contact-detail.css",
     contact,
   });
 });
