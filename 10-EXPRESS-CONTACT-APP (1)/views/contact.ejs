@@ -10,7 +10,13 @@
     </tr>
   </thead>
   <tbody>
-    <% contacts.forEach((contact,i) => { %>
+    <% if (contacts.length < 1) { %>
+    <tr>
+      <td colspan="5">
+        <h3 class="alert-empty">Kontak Karyawan Tidak Ada !</h3>
+      </td>
+    </tr>
+    <% } else{ %> <% contacts.forEach((contact,i) => { %>
     <tr>
       <td><%= i +=1 %></td>
       <td><%= contact.nama %></td>
@@ -22,11 +28,6 @@
         </button>
       </td>
     </tr>
-    <% }) %>
-    <!-- <tr class="active-row">
-      <td>Melissa</td>
-      <td>5150</td>
-    </tr> -->
-    <!-- and so on... -->
+    <% }) %> <% } %>
   </tbody>
 </table>

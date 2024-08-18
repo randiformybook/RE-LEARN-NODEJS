@@ -1,19 +1,33 @@
-    <!-- Navbar -->
-    <header>
-      <a href="/" class="logo">RANDI CODING</a>
-      <nav>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li>
-            <a href="/" id="serviceButton" class="active">Service</a>
-          </li>
-          <!-- bagaimana cara membuat service menjadi disable alias tidak bisa di click? -->
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="menu-toggle">
-        <i class="fa fa-bars"></i>
-      </div>
-    </header>
-    <!-- Navbar -->
+<!-- Navbar -->
+<header>
+  <a href="/" class="logo">RANDI CODING</a>
+  <nav>
+    <ul>
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="/about" class="<%= currentPath === '/about' ? 'active' : '' %>"
+          >About</a
+        >
+      </li>
+      <li>
+        <a href="javascript:void(0)" id="serviceButton" class="disabled"
+          >Service</a
+        >
+      </li>
+      <!-- bagaimana cara membuat service menjadi disable alias tidak bisa di click? -->
+      <li>
+        <a
+          href="/contact"
+          class="<%= currentPath === '/contact' ? 'active' : '' %>"
+          >Contact</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <div class="menu-toggle">
+    <i class="fa fa-bars"></i>
+  </div>
+</header>
+<!-- Navbar -->

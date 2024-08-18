@@ -85,6 +85,12 @@
   transform: translateY(-2px);
 }
 
+.alert-empty {
+  color: rgb(150, 0, 0);
+  font-weight: bold;
+  text-align: center;
+}
+
 /* .button-28:active {
   box-shadow: none;
   transform: translateY(0);

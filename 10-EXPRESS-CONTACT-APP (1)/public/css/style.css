@@ -62,7 +62,7 @@ header nav ul li a {
 header nav ul li a:hover,
 header nav ul li a.active {
   color: #ffffff;
-  background-color: #aaaaaa;
+  background-color: #c2c1b3;
 }
 
 .menu-toggle {
@@ -72,6 +72,11 @@ header nav ul li a.active {
   font-size: 24px;
   cursor: pointer;
   display: none;
+}
+a.disabled {
+  background-color: grey;
+  color: #333;
+  pointer-events: none;
 }
 
 /* responsive */

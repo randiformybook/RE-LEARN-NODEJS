@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
   res.render("index", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Home",
+    currentPath: req.path,
     cssLink: "/",
     karyawan,
   });
@@ -35,6 +36,7 @@ app.get("/about", (req, res) => {
   res.render("about", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman About",
+    currentPath: req.path,
     cssLink: "/",
   });
 });
@@ -45,6 +47,7 @@ app.get("/contact", async (req, res) => {
   res.render("contact", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Contact",
+    currentPath: req.path,
     cssLink: "/",
     contacts,
   });

@@ -31,6 +31,7 @@ async function checkDir() {
 
 async function loadFile() {
   const dataJson = await fs.readFile(filePath, "utf-8");
+  if (!dataJson) return false;
   const dataBuffer = await JSON.parse(dataJson);
   return dataBuffer;
 }
