@@ -1,0 +1,33 @@
+<h1 class="dtrkontak"><i>Daftar Kontak karyawan</i></h1>
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>No</th>
+      <th>Nama</th>
+      <th>No Handphone</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (contacts.length < 1) { %>
+    <tr>
+      <td colspan="5">
+        <h3 class="alert-empty">Kontak Karyawan Tidak Ada !</h3>
+      </td>
+    </tr>
+    <% } else{ %> <% contacts.forEach((contact,i) => { %>
+    <tr>
+      <td><%= i +=1 %></td>
+      <td><%= contact.nama %></td>
+      <td><%= contact.nohp %></td>
+      <td><%= contact.email %></td>
+      <td>
+        <button class="button-28" type="button">
+          <a href="/contact/<%= contact.id %>">Details</a>
+        </button>
+      </td>
+    </tr>
+    <% }) %> <% } %>
+  </tbody>
+</table>
