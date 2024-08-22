@@ -1,11 +1,14 @@
+.container-daftarcontact {
+  width: 800px;
+  margin: 10px auto;
+}
 .dtrkontak {
-  margin: 25px auto;
   text-align: center;
   color: rgb(56, 56, 56);
 }
 
 .styled-table {
-  width: 1000px;
+  width: 100%;
   border-collapse: collapse;
   margin: 25px auto;
   font-size: 1em;
