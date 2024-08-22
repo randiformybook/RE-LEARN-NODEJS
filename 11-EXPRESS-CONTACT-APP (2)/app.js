@@ -48,7 +48,7 @@ app.get("/contact", async (req, res) => {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Contact",
     // currentPath: req.path,
-    cssLink: ["/"],
+    cssLink: ["/css/btn-add-button.css", "/css/table.css"],
     contacts,
   });
 });
