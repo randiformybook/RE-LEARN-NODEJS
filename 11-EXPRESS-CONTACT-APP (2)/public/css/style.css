@@ -8,32 +8,31 @@ body {
   background-size: cover;
   height: 100vh;
 }
+
 body .container {
   padding-top: 60px;
   margin: 50px;
 }
 
 header {
-  /* position: absolute; */
   position: fixed;
   background: #dedddd;
   top: 0;
   left: 0;
   height: 60px;
-  padding: 0 100px;
   width: 100%;
+  padding: 0 20px;
   box-sizing: border-box;
   z-index: 999;
 }
 
 header .logo {
   color: rgb(83, 83, 83);
-  height: 60px;
   line-height: 60px;
   font-size: 24px;
-  float: left;
   font-weight: bold;
   text-decoration: none;
+  float: left;
 }
 
 header nav {
@@ -44,19 +43,16 @@ header nav ul {
   margin: 0;
   padding: 0;
   display: flex;
-}
-
-header nav ul li {
+  align-items: center;
   list-style: none;
 }
 
 header nav ul li a {
   color: rgb(83, 83, 83);
-  height: 60px;
-  line-height: 60px;
   padding: 0 20px;
   text-decoration: none;
   display: block;
+  line-height: 60px;
 }
 
 header nav ul li a:hover,
@@ -66,24 +62,19 @@ header nav ul li a.active {
 }
 
 .menu-toggle {
+  display: none;
   color: rgb(94, 94, 94);
   float: right;
-  line-height: 50px;
+  line-height: 60px;
   font-size: 24px;
   cursor: pointer;
-  display: none;
-}
-a.disabled {
-  background-color: grey;
-  color: #333;
-  pointer-events: none;
 }
 
-/* responsive */
-
-@media (max-width: 650px) {
-  header {
-    padding: 0 20px;
+/* Responsive Styles */
+@media (max-width: 768px) {
+  header .logo {
+    font-size: 20px;
+    line-height: 60px;
   }
 
   .menu-toggle {
@@ -91,13 +82,14 @@ a.disabled {
   }
 
   header nav {
-    position: absolute;
+    position: fixed;
     width: 100%;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 60px);
     background: #333;
-    top: 50px;
+    top: 60px;
     left: -100%;
-    transition: 0.5s all;
+    transition: all 0.3s ease;
+    z-index: 998;
   }
 
   header nav.active {
@@ -105,11 +97,36 @@ a.disabled {
   }
 
   header nav ul {
-    display: block;
-    text-align: center;
+    flex-direction: column;
+    align-items: flex-start;
   }
+
   header nav ul li a {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    color: rgb(255, 255, 255);
+    color: #ffffff;
+    padding: 15px 20px;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  header nav ul li a:hover,
+  header nav ul li a.active {
+    background-color: #c2c1b3;
+    color: #ffffff;
+  }
+}
+
+/* Additional responsive adjustments for smaller screens */
+@media (max-width: 480px) {
+  body .container {
+    margin: 20px;
+    padding-top: 50px;
+  }
+
+  header .logo {
+    font-size: 18px;
+  }
+
+  header nav ul li a {
+    padding: 10px 15px;
   }
 }

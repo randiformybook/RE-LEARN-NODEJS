@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Home",
     // currentPath: req.path,
-    cssLink: "/",
+    cssLink: ["/"],
     karyawan,
   });
 });
@@ -37,7 +37,7 @@ app.get("/about", (req, res) => {
     layout: "layouts/main-layout.ejs",
     title: "Halaman About",
     // currentPath: req.path,
-    cssLink: "/",
+    cssLink: ["/"],
   });
 });
 // -------Contact Page Route---------
@@ -48,7 +48,7 @@ app.get("/contact", async (req, res) => {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Contact",
     // currentPath: req.path,
-    cssLink: "/",
+    cssLink: ["/"],
     contacts,
   });
 });
@@ -58,7 +58,7 @@ app.get("/contact/:id", async (req, res) => {
   res.render("contact-detail", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Detail Contact",
-    cssLink: "/css/contact-detail.css",
+    cssLink: ["/css/contact-detail.css"],
     contact,
   });
 });
