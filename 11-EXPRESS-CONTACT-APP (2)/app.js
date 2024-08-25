@@ -36,7 +36,6 @@ app.get("/about", (req, res) => {
   res.render("about", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman About",
-    // currentPath: req.path,
     cssLink: ["/"],
   });
 });
@@ -47,15 +46,25 @@ app.get("/contact", async (req, res) => {
   res.render("contact", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Contact",
-    // currentPath: req.path,
     cssLink: ["/css/btn-add-button.css", "/css/table.css"],
     contacts,
   });
 });
-// Contact Detail by ID
+// -------Add Contact Page Route---------
+app.get("/contact/add", async (req, res) => {
+  res.render("page-contact-add", {
+    layout: "layouts/main-layout.ejs",
+    title: "Halaman Add Contact Form",
+    cssLink: ["/css/page-add-contact.css", "/css/btn-add-button.css"],
+  });
+});
+// -------Contact Detail by ID Page Route---------
 app.get("/contact/:id", async (req, res) => {
+  if (isNaN(req.params.id)) {
+    return res.status(404).send("Contact not Found");
+  }
   const contact = await findContact(req.params.id);
-  res.render("contact-detail", {
+  res.render("page-contact-detail", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Detail Contact",
     cssLink: ["/css/contact-detail.css"],
