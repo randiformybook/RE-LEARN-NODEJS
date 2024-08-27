@@ -72,7 +72,8 @@ html {
 }
 
 /* CSS ADD */
-.action-button-add {
+.action-button-add,
+.action-button-reset {
   font-weight: bold;
   color: black;
   font-size: 16px;
@@ -89,7 +90,8 @@ html {
   touch-action: manipulation;
 }
 
-.action-button-add:after {
+.action-button-add:after,
+.action-button-reset:after {
   content: "";
   background-color: #c2c1b3;
   width: 100%;
@@ -100,8 +102,15 @@ html {
   left: 7px;
   transition: 0.2s;
 }
+.action-button-reset {
+  margin-left: 10px;
+}
+.action-button-reset::after {
+  background-color: #7e7e75;
+}
 
-.action-button-add:hover:after {
+.action-button-add:hover:after,
+.action-button-reset:hover:after {
   top: 0px;
   left: 0px;
 }
@@ -113,7 +122,7 @@ html {
 }
 
 /* CSS BACK */
-.action-button-back {
+/* .action-button-back {
   font-weight: bold;
   color: black;
   font-size: 16px;
@@ -145,7 +154,7 @@ html {
 .action-button-back:hover:after {
   top: 0px;
   left: 0px;
-}
+} */
 
 @media (min-width: 768px) {
   .action-button-back {
