@@ -53,7 +53,9 @@ async function addContact(data) {
 async function deleteContact(id) {
   const contacts = await loadFile();
   const oldContacts = contacts.length;
-  const newContacts = await contacts.filter((contact) => contact.id !== id);
+  const newContacts = await contacts.filter(
+    (contact) => contact.id !== parseInt(id)
+  );
   if (oldContacts > newContacts.length) {
     const updateBuffer = await Buffer.from(JSON.stringify(newContacts));
     await fs.writeFile(filePath, updateBuffer);
