@@ -1,14 +1,1 @@
-[
-  {
-    "id": 127111000,
-    "nama": "Randi Himawan",
-    "nohp": "081233334444",
-    "email": "randi@gmail.com"
-  },
-  {
-    "id": 127222444,
-    "nama": "Putri Swandayani",
-    "nohp": "082255556666",
-    "email": "putri@yahoo.com"
-  }
-]
+[{"id":127111000,"nama":"Randi Himawan","nohp":"081233334444","email":"randi@gmail.com"},{"id":127222444,"nama":"Putri Swandayani","nohp":"082255556666","email":"putri@yahoo.com"}]

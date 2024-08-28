@@ -43,8 +43,29 @@ async function findContact(id) {
   return contact;
 }
 
+async function addContact(data) {
+  const contacts = await loadFile();
+  await contacts.push(data);
+  const updateBuffer = await Buffer.from(JSON.stringify(contacts));
+  await fs.writeFile(filePath, updateBuffer);
+}
+
+async function deleteContact(id) {
+  const contacts = await loadFile();
+  const oldContacts = contacts.length;
+  const newContacts = await contacts.filter((contact) => contact.id !== id);
+  if (oldContacts > newContacts.length) {
+    const updateBuffer = await Buffer.from(JSON.stringify(newContacts));
+    await fs.writeFile(filePath, updateBuffer);
+  } else {
+    console.error(`Contact with ID ${id} not found.`);
+  }
+}
+
 module.exports = {
   checkDir,
   loadFile,
   findContact,
+  addContact,
+  deleteContact,
 };

@@ -5,16 +5,19 @@ const {
   checkDir,
   loadFile,
   findContact,
+  addContact,
+  deleteContact,
 } = require("./utilities/contact-system");
 
 // Menyajikan file statis dari folder 'public'
-app.use(express.static("public"));
 
 // gunakan ejs
 app.set("view engine", "ejs");
 
 // Third-party Middleware
 app.use(expressLayouts);
+app.use(express.static("public")); // Menyajikan file statis dari folder 'public'
+app.use(express.urlencoded({ extended: true })); // untuk mengakses data dari form
 
 // -------Home Page Route---------
 app.get("/", (req, res) => {
@@ -26,7 +29,6 @@ app.get("/", (req, res) => {
   res.render("index", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Home",
-    // currentPath: req.path,
     cssLink: ["/"],
     karyawan,
   });
@@ -58,6 +60,23 @@ app.get("/contact/add", async (req, res) => {
     cssLink: ["/css/page-add-contact.css", "/css/btn-add-button.css"],
   });
 });
+
+// -------Proses ammbil data dari Add Contact---------
+app.post("/contact", async (req, res) => {
+  await addContact(req.body);
+  res.redirect("contact");
+});
+
+app.post("/contact/delete/:id", async (req, res) => {
+  try {
+    await deleteContact(req.params.id);
+    res.redirect("/contact");
+  } catch (err) {
+    console.error("Failed to delete contact:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 // -------Contact Detail by ID Page Route---------
 app.get("/contact/:id", async (req, res) => {
   if (isNaN(req.params.id)) {

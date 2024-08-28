@@ -28,6 +28,19 @@
           <button class="button-28" type="button">
             <a href="/contact/<%= contact.id %>">Details</a>
           </button>
+          <form
+            action="/contact/delete/<%= contact.id %>"
+            method="post"
+            style="display: inline"
+          >
+            <button
+              type="submit"
+              class="button-28"
+              onclick="return confirm(`Are you sure want to delete this contact ?`);"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </form>
         </td>
       </tr>
       <% }) %> <% } %>
