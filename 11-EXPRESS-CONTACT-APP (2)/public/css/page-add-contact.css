@@ -115,6 +115,13 @@ html {
   left: 0px;
 }
 
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+}
+
 @media (min-width: 768px) {
   .action-button-add {
     padding: 13px 50px 13px;

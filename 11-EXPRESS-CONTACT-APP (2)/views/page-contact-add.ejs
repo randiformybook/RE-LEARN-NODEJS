@@ -1,20 +1,55 @@
 <div class="login-box">
   <h2>Login</h2>
+
+  <% if (typeof errors != "undefined"){ %>
+  <div class="error-message">
+    <ul>
+      <% errors.forEach(err => { %>
+      <li><%= err.msg %></li>
+      <% }) %>
+    </ul>
+  </div>
+  <% } %>
+
   <form method="post" action="/contact">
     <div class="user-box">
-      <input type="text" id="nama" name="nama" required />
+      <input
+        type="text"
+        id="nama"
+        name="nama"
+        value="<%= inputData.nama ? inputData.nama : '' %>"
+        required
+      />
       <label for="nama">Full Name</label>
     </div>
     <div class="user-box">
-      <input type="number" id="id" name="id" required />
+      <input
+        type="number"
+        id="id"
+        name="id"
+        value="<%= inputData.id ? inputData.id : '' %>"
+        required
+      />
       <label for="id">ID Number</label>
     </div>
     <div class="user-box">
-      <input type="number" id="nohp" name="nohp" required />
+      <input
+        type="number"
+        id="nohp"
+        name="nohp"
+        value="<%= inputData.nohp ? inputData.nohp : '' %>"
+        required
+      />
       <label for="nohp">No Handphone</label>
     </div>
     <div class="user-box">
-      <input type="email" id="email" name="email" required />
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value="<%= inputData.email ? inputData.email : '' %>"
+        required
+      />
       <label for="email">Email</label>
     </div>
     <span class="action">

@@ -1,6 +1,7 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const app = express();
+const { query, validationResult, body } = require("express-validator");
 const {
   checkDir,
   loadFile,
@@ -8,16 +9,22 @@ const {
   addContact,
   deleteContact,
 } = require("./utilities/contact-system");
+const { validateContact } = require("./utilities/validator");
 
 // Menyajikan file statis dari folder 'public'
 
 // gunakan ejs
 app.set("view engine", "ejs");
 
-// Third-party Middleware
+// -------Third Party Middleware---------
+// Menggunakan Express Layout
 app.use(expressLayouts);
-app.use(express.static("public")); // Menyajikan file statis dari folder 'public'
-app.use(express.urlencoded({ extended: true })); // untuk mengakses data dari form
+// Menyajikan file statis dari folder 'public'
+app.use(express.static("public"));
+// express.urlencoded({ extended: true }) berfungsi untuk Mengurai data yang dikirimkan dalam format URL-encoded
+app.use(express.urlencoded({ extended: true }));
+// Mengurai data yang dikirimkan dalam format JSON, contoh ketika menerimah API dari Browser, saat penggunaan Fecth dsb
+app.use(express.json());
 
 // -------Home Page Route---------
 app.get("/", (req, res) => {
@@ -62,10 +69,26 @@ app.get("/contact/add", async (req, res) => {
 });
 
 // -------Proses ammbil data dari Add Contact---------
-app.post("/contact", async (req, res) => {
-  await addContact(req.body);
-  res.redirect("contact");
-});
+app.post(
+  "/contact",
+  // validation & Sanitization
+  validateContact(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render("page-contact-add", {
+        layout: "layouts/main-layout.ejs",
+        title: "Halaman Add Contact Form",
+        cssLink: ["/css/page-add-contact.css", "/css/btn-add-button.css"],
+        errors: errors.array(),
+        inputData: req.body,
+      });
+    }
+    const { nama, id, nohp, email } = req.body;
+    await addContact({ nama, id, nohp, email });
+    res.redirect("/contact");
+  }
+);
 
 app.post("/contact/delete/:id", async (req, res) => {
   try {
