@@ -10,13 +10,24 @@ const {
   deleteContact,
 } = require("./utilities/contact-system");
 const { validateContact } = require("./utilities/validator");
-
-// Menyajikan file statis dari folder 'public'
+// flash message
+const session = require("express-session");
+const flash = require("connect-flash");
 
 // gunakan ejs
 app.set("view engine", "ejs");
+// Middleware Session
+app.use(
+  session({
+    secret: "flash123456",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 // -------Third Party Middleware---------
+// connect flash
+app.use(flash());
 // Menggunakan Express Layout
 app.use(expressLayouts);
 // Menyajikan file statis dari folder 'public'
@@ -25,6 +36,14 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 // Mengurai data yang dikirimkan dalam format JSON, contoh ketika menerimah API dari Browser, saat penggunaan Fecth dsb
 app.use(express.json());
+
+//Middleware untuk mengakses pesan flash di view
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg") || null;
+  res.locals.delete_msg = req.flash("delete_msg") || null;
+  res.locals.error_msg = req.flash("error_msg") || null;
+  next();
+});
 
 // -------Home Page Route---------
 app.get("/", (req, res) => {
@@ -37,6 +56,7 @@ app.get("/", (req, res) => {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Home",
     cssLink: ["/"],
+    jsLink: ["/"],
     karyawan,
   });
 });
@@ -46,6 +66,7 @@ app.get("/about", (req, res) => {
     layout: "layouts/main-layout.ejs",
     title: "Halaman About",
     cssLink: ["/"],
+    jsLink: ["/"],
   });
 });
 // -------Contact Page Route---------
@@ -55,7 +76,12 @@ app.get("/contact", async (req, res) => {
   res.render("contact", {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Contact",
-    cssLink: ["/css/btn-add-button.css", "/css/table.css"],
+    cssLink: [
+      "/css/btn-add-button.css",
+      "/css/table.css",
+      "/css/flash-message.css",
+    ],
+    jsLink: ["/js/flashMessage.js"],
     contacts,
   });
 });
@@ -65,6 +91,7 @@ app.get("/contact/add", async (req, res) => {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Add Contact Form",
     cssLink: ["/css/page-add-contact.css", "/css/btn-add-button.css"],
+    jsLink: ["/"],
   });
 });
 
@@ -86,6 +113,8 @@ app.post(
     }
     const { nama, id, nohp, email } = req.body;
     await addContact({ nama, id, nohp, email });
+    // Menampilkan Pesan Flash kalau Success
+    req.flash("success_msg", "Data Berhasil Ditambahkan");
     res.redirect("/contact");
   }
 );
@@ -93,6 +122,8 @@ app.post(
 app.post("/contact/delete/:id", async (req, res) => {
   try {
     await deleteContact(req.params.id);
+    req.flash("delete_msg", "Kontak berhasil di Hapus");
+    console.log("Data Berhasil di Hapus !");
     res.redirect("/contact");
   } catch (err) {
     console.error("Failed to delete contact:", err);

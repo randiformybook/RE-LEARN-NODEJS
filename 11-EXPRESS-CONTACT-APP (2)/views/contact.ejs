@@ -1,6 +1,19 @@
 <div class="container-daftarcontact">
+  <!-- Title dari Halaman Contact -->
   <h1 class="dtrkontak"><i>Daftar Kontak karyawan</i></h1>
+  <!-- Kalau Kontak berhasil di Simpan -->
+  <% if (success_msg) { %>
+  <div class="flash-message"><%= success_msg %></div>
+  <% } %>
+  <!-- Kalau Kontak berhasil di Delete -->
+  <% if (delete_msg) { %>
+  <div class="delete-message"><%= delete_msg %></div>
+  <% } %>
+  <!-- End : Kalau Kontak berhasil di Simpan dan Delete -->
+  <!-- Button untuk menambah Kontak yang berada di atas Table -->
   <a class="btn-contact-add" href="/contact/add">Add Contact +</a>
+  <!-- End : Button untuk menambah Kontak yang berada di atas Table -->
+  <!-- Start : Table dari Daftar Kontak -->
   <table class="styled-table">
     <thead>
       <tr>
@@ -12,12 +25,14 @@
       </tr>
     </thead>
     <tbody>
+      <!-- Kalau Daftar Kontak Tidak Ada -->
       <% if (contacts.length < 1) { %>
       <tr>
         <td colspan="5">
           <h3 class="alert-empty">Kontak Karyawan Tidak Ada !</h3>
         </td>
       </tr>
+      <!-- Kalau Daftar Kontak Ada, maka akan looping Daftar Kontak yang ada di Data Kontak -->
       <% } else{ %> <% contacts.forEach((contact,i) => { %>
       <tr>
         <td><%= i +=1 %></td>
@@ -28,6 +43,7 @@
           <button class="button-28" type="button">
             <a href="/contact/<%= contact.id %>">Details</a>
           </button>
+          <!-- Button untuk Delete Kontak sesuai Kontaknya, disini saya membuat Button kontaknya di Cover oleh form, untuk membuat Button memiliki Posy -->
           <form
             action="/contact/delete/<%= contact.id %>"
             method="post"
@@ -46,4 +62,5 @@
       <% }) %> <% } %>
     </tbody>
   </table>
+  <!-- End : Table dari Daftar Kontak -->
 </div>
