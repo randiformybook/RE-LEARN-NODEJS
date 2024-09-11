@@ -2,11 +2,11 @@
   <!-- Title dari Halaman Contact -->
   <h1 class="dtrkontak"><i>Daftar Kontak karyawan</i></h1>
   <!-- Kalau Kontak berhasil di Simpan -->
-  <% if (success_msg) { %>
+  <% if (success_msg.length > 0) { %>
   <div class="flash-message"><%= success_msg %></div>
   <% } %>
   <!-- Kalau Kontak berhasil di Delete -->
-  <% if (delete_msg) { %>
+  <% if (delete_msg.length > 0) { %>
   <div class="delete-message"><%= delete_msg %></div>
   <% } %>
   <!-- End : Kalau Kontak berhasil di Simpan dan Delete -->

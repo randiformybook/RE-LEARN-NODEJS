@@ -123,7 +123,6 @@ app.post("/contact/delete/:id", async (req, res) => {
   try {
     await deleteContact(req.params.id);
     req.flash("delete_msg", "Kontak berhasil di Hapus");
-    console.log("Data Berhasil di Hapus !");
     res.redirect("/contact");
   } catch (err) {
     console.error("Failed to delete contact:", err);
