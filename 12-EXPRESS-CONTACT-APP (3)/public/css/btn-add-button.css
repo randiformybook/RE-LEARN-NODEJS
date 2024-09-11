@@ -1,0 +1,25 @@
+.btn-contact-add {
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  background: #f3f3f3;
+  color: #595959;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border-bottom: 2px solid #c2c1b3;
+  border-right: 2px solid #c2c1b3;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  transition-duration: 1s;
+  transition-property: border-top, border-left, border-bottom, border-right,
+    box-shadow;
+}
+
+.btn-contact-add:hover {
+  border-top: 2px solid #c2c1b3;
+  border-left: 2px solid #c2c1b3;
+  border-bottom: 2px solid #bdbcb9;
+  border-right: 2px solid #bdbcb9;
+  box-shadow: rgba(194, 193, 179, 0.4) 5px 5px,
+    rgba(194, 193, 179, 0.3) 10px 10px, rgba(194, 193, 179, 0.2) 15px 15px;
+}

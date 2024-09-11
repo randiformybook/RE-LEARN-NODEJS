@@ -1,0 +1,12 @@
+<h4>Ini Aadalah <%= title %>, yang dimana sebagai halaman pertama</h4>
+<h2>Data Karyawan :</h2>
+
+<% if (karyawan.length < 1) { %>
+<h3>Data Karyawan Tidak ada !</h3>
+<% } else { %> <% karyawan.forEach(k => { %>
+<ul>
+  <li>Nama Karyawa : <%= k.nama %></li>
+  <li>ID Karyawan : <%= k.id %></li>
+  <li>Pekerjaan Karyawan : <%= k.jabatan %></li>
+</ul>
+<% }) %> <% } %>
