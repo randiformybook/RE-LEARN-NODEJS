@@ -95,7 +95,7 @@ app.get("/contact/add", async (req, res) => {
   });
 });
 
-// -------Proses ammbil data dari Add Contact---------
+// -------Proses ambil data dari Add Contact---------
 app.post(
   "/contact",
   // validation & Sanitization
@@ -119,13 +119,30 @@ app.post(
   }
 );
 
-app.post("/contact/delete/:id", async (req, res) => {
+// // -------Proses Men-Delete Contact---------
+// app.post("/contact/delete/:id", async (req, res) => {
+//   try {
+//     await deleteContact(req.params.id);
+//     req.flash("delete_msg", "Kontak berhasil di Hapus");
+//     res.redirect("/contact");
+//   } catch (err) {
+//     console.error("Failed to delete contact:", err);
+//     res.status(500).send("Internal Server Error");
+//   }
+// });
+
+app.delete("/contact/delete/:id", async (req, res) => {
   try {
-    await deleteContact(req.params.id);
+    const id = req.params.id;
+    await deleteContact(id);
     req.flash("delete_msg", "Kontak berhasil di Hapus");
     res.redirect("/contact");
+    res.setHeader(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate"
+    );
   } catch (err) {
-    console.error("Failed to delete contact:", err);
+    console.error("Failed to delete contact :", err);
     res.status(500).send("Internal Server Error");
   }
 });
@@ -140,10 +157,12 @@ app.get("/contact/:id", async (req, res) => {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Detail Contact",
     cssLink: ["/css/contact-detail.css"],
+    jsLink: ["/"],
     contact,
   });
 });
-// Apabila halaman tidak di temukan
+
+// Apabila URL halaman tidak di temukan
 app.use("/", (req, res) => {
   res.sendStatus(404);
 });

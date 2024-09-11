@@ -140,6 +140,7 @@ app.get("/contact/:id", async (req, res) => {
     layout: "layouts/main-layout.ejs",
     title: "Halaman Detail Contact",
     cssLink: ["/css/contact-detail.css"],
+    jsLink: ["/"],
     contact,
   });
 });
