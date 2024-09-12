@@ -1,0 +1,43 @@
+<div class="login-box">
+  <h2>Login</h2>
+
+  <% if (typeof errors != "undefined"){ %>
+  <div class="error-message">
+    <ul>
+      <% errors.forEach(err => { %>
+      <li><%= err.msg %></li>
+      <% }) %>
+    </ul>
+  </div>
+  <% } %>
+
+  <form method="post" action="/contact">
+    <div class="user-box">
+      <input type="text" id="nama" name="nama" value="<%= typeof inputData !==
+      "undefined" ? inputData.nama : contact.nama %>" required />
+      <label for="nama">Full Name</label>
+    </div>
+    <div class="user-box">
+      <input type="number" id="id" name="id" value="<%= typeof inputData !==
+      "undefined" ? inputData.id : contact.id %>" required />
+      <label for="id">ID Number</label>
+    </div>
+    <div class="user-box">
+      <input type="number" id="nohp" name="nohp" value="<%= typeof inputData !==
+      "undefined" ? inputData.nohp : contact.nohp %>" required />
+      <label for="nohp">No Handphone</label>
+    </div>
+    <div class="user-box">
+      <input type="email" id="email" name="email"value="<%= typeof inputData !==
+      "undefined" ? inputData.email : contact.email %>" required />
+      <label for="email">Email</label>
+    </div>
+    <span class="action">
+      <button type="submit" class="action-button-add">Submit</button>
+      <button type="reset" class="action-button-reset">Reset</button>
+    </span>
+  </form>
+  <!-- <span class="action">
+    <a class="action-button-back" href="/contact">Back</a>
+  </span> -->
+</div>

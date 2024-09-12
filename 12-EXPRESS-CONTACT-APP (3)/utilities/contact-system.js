@@ -63,6 +63,11 @@ async function deleteContact(id) {
   }
 }
 
+async function updateContact(id, update) {
+  const contacts = await loadFile();
+  const contact = await contacts.find((contact) => contact.id === id);
+}
+
 module.exports = {
   checkDir,
   loadFile,

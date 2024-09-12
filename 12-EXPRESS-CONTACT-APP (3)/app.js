@@ -13,6 +13,7 @@ const { validateContact } = require("./utilities/validator");
 // flash message
 const session = require("express-session");
 const flash = require("connect-flash");
+const methodOverride = require("method-override");
 
 // gunakan ejs
 app.set("view engine", "ejs");
@@ -36,6 +37,8 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 // Mengurai data yang dikirimkan dalam format JSON, contoh ketika menerimah API dari Browser, saat penggunaan Fecth dsb
 app.use(express.json());
+// Menggunakan Method-Override untuk bisa membuat method button tidak hanya get atau post, melainkan bisa yang lain seperti App.put dan App.delete
+app.use(methodOverride("_method"));
 
 //Middleware untuk mengakses pesan flash di view
 app.use((req, res, next) => {
@@ -109,6 +112,7 @@ app.post(
         cssLink: ["/css/page-add-contact.css", "/css/btn-add-button.css"],
         errors: errors.array(),
         inputData: req.body,
+        jsLink: ["/"],
       });
     }
     const { nama, id, nohp, email } = req.body;
@@ -119,6 +123,22 @@ app.post(
   }
 );
 
+// -------Update Contact Route by ID Contact---------
+app.get("/contact/update/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const contact = await findContact(id);
+    res.render("page-contact-update", {
+      layout: "layouts/main-layout.ejs",
+      title: "Halaman Update Contact Form",
+      cssLink: ["/css/page-add-contact.css", "/css/btn-add-button.css"],
+      jsLink: ["/"],
+      contact,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 // // -------Proses Men-Delete Contact---------
 // app.post("/contact/delete/:id", async (req, res) => {
 //   try {
@@ -137,10 +157,6 @@ app.delete("/contact/delete/:id", async (req, res) => {
     await deleteContact(id);
     req.flash("delete_msg", "Kontak berhasil di Hapus");
     res.redirect("/contact");
-    res.setHeader(
-      "Cache-Control",
-      "no-cache, private, no-store, must-revalidate"
-    );
   } catch (err) {
     console.error("Failed to delete contact :", err);
     res.status(500).send("Internal Server Error");

@@ -45,7 +45,7 @@
           </button>
           <!-- Button untuk Delete Kontak sesuai Kontaknya, disini saya membuat Button kontaknya di Cover oleh form, untuk membuat Button memiliki Posy -->
           <form
-            action="/contact/delete/<%= contact.id %>"
+            action="/contact/delete/<%= contact.id %>?_method=DELETE"
             method="post"
             style="display: inline"
           >
@@ -57,6 +57,10 @@
               <i class="fas fa-trash-alt"></i>
             </button>
           </form>
+          <!-- ------------------------------ -->
+          <a href="/contact/update/<%= contact.id %>"
+            ><i class="fas fa-edit"></i
+          ></a>
         </td>
       </tr>
       <% }) %> <% } %>
