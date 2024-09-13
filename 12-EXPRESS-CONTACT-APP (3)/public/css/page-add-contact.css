@@ -128,6 +128,38 @@ html {
   }
 }
 
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px; /* Posisi di kanan atas */
+  border: none;
+  background-color: transparent; /* Background transparan */
+  color: #ccc; /* Warna icon */
+  font-size: 1.5rem; /* Ukuran icon */
+  cursor: pointer; /* Tampilan kursor saat hover */
+  transition: all 0.3s ease-in-out; /* Efek animasi saat hover */
+}
+
+.close-button:hover {
+  color: #888; /* Warna icon saat hover */
+  /* Menambahkan tulisan "Close" saat hover */
+  ::after {
+    content: "Close";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem; /* Ukuran tulisan */
+    color: #888; /* Warna tulisan */
+    opacity: 0; /* Awalnya tidak terlihat */
+    transition: opacity 0.3s ease-in-out;
+  }
+}
+
+.close-button:hover::after {
+  opacity: 1; /* Muncul saat hover */
+}
+
 /* CSS BACK */
 /* .action-button-back {
   font-weight: bold;

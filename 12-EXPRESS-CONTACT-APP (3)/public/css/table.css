@@ -1,5 +1,5 @@
 .container-daftarcontact {
-  width: 800px;
+  width: 1000px;
   margin: 10px auto;
 }
 .dtrkontak {
@@ -14,7 +14,7 @@
   font-size: 1em;
   font-family: sans-serif;
   min-width: 300px;
-  max-width: 800px;
+  max-width: 100%;
   overflow: scroll;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
