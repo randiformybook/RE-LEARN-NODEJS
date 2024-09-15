@@ -159,6 +159,8 @@ app.put("/contact/update/:id", validateContact(), async (req, res) => {
   const { nama, nohp, email } = req.body;
   try {
     await updateContact(id, { nama, nohp, email });
+    req.flash("success_msg", "Data Berhasil Diubah");
+    res.redirect("/contact");
   } catch (err) {
     console.log(err);
   }

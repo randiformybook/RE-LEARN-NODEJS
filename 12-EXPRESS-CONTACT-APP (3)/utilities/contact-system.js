@@ -68,7 +68,12 @@ async function updateContact(id, updatedData) {
   const contactIndex = await contacts.findIndex((contact) => contact.id === id);
   if (contactIndex !== -1) {
     contacts[contactIndex] = { ...contacts[contactIndex], ...updatedData };
-    console.log(contacts[contactIndex]);
+    const updateBuffer = await Buffer.from(JSON.stringify(contacts));
+    await fs.writeFile(filePath, updateBuffer);
+  } else {
+    throw new Error(
+      "Contact Gagal untuk di Update !, Silahkan Mencoba kembali"
+    );
   }
 }
 
