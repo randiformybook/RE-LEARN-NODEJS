@@ -122,6 +122,29 @@ html {
   padding-bottom: 5px;
 }
 
+/* Untuk memastikan label berada di atas ketika ada nilai atau input fokus */
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+/* Tambahkan aturan ini di bagian akhir CSS */
+.user-box input[readonly] {
+  pointer-events: none; /* Mencegah input dari bisa diklik */
+  color: #989898; /* Ubah warna teks menjadi abu-abu untuk menandakan input tidak bisa diedit */
+}
+
+/* Aturan ini memastikan label naik ke atas meskipun input readonly */
+.login-box .user-box input[readonly] ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
 @media (min-width: 768px) {
   .action-button-add {
     padding: 13px 50px 13px;

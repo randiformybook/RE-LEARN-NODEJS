@@ -3,9 +3,10 @@ const { findContact } = require("./contact-system");
 
 const validateContact = () => {
   return [
-    body("id").custom(async (value) => {
+    body("id").custom(async (value, { req }) => {
       const existingContact = await findContact(value);
-      if (existingContact) throw new Error("Contact ID already exist");
+      if (existingContact && existingContact.id !== req.params.id)
+        throw new Error("Contact ID already exist");
       return true;
     }),
     body("nama")

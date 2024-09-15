@@ -13,15 +13,20 @@
   <a href="/contact" class="close-button">
     <i class="fas fa-times"></i>
   </a>
-  <form method="post" action="/contact">
+  <form method="post" action="/contact/update/<%= contact.id %>?_method=PUT">
     <div class="user-box">
       <input type="text" id="nama" name="nama" value="<%= typeof inputData !==
       "undefined" ? inputData.nama : contact.nama %>" required />
       <label for="nama">Full Name</label>
     </div>
     <div class="user-box">
-      <input type="number" id="id" name="id" value="<%= typeof inputData !==
-      "undefined" ? inputData.id : contact.id %>" required />
+      <input
+        type="number"
+        id="id"
+        name="id"
+        value="<%=contact.id %>"
+        readonly
+      />
       <label for="id">ID Number</label>
     </div>
     <div class="user-box">
@@ -30,8 +35,8 @@
       <label for="nohp">No Handphone</label>
     </div>
     <div class="user-box">
-      <input type="email" id="email" name="email"value="<%= typeof inputData !==
-      "undefined" ? inputData.email : contact.email %>" required />
+      <input type="email" id="email" name="email" value="<%= typeof inputData
+      !== "undefined" ? inputData.email : contact.email %>" required />
       <label for="email">Email</label>
     </div>
     <span class="action">

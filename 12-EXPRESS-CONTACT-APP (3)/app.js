@@ -8,6 +8,7 @@ const {
   findContact,
   addContact,
   deleteContact,
+  updateContact,
 } = require("./utilities/contact-system");
 const { validateContact } = require("./utilities/validator");
 // flash message
@@ -123,23 +124,47 @@ app.post(
   }
 );
 
-// -------Update Contact Route by ID Contact---------
+// -------Update Contact Page by ID Contact---------
 app.get("/contact/update/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const contact = await findContact(id);
-    res.render("page-contact-update", {
+  const id = req.params.id;
+  const contact = await findContact(id);
+  res.render("page-contact-update", {
+    layout: "layouts/main-layout.ejs",
+    title: "Halaman Update Contact Form",
+    cssLink: ["/css/page-add-contact.css", "/css/btn-add-button.css"],
+    jsLink: ["/"],
+    contact,
+  });
+});
+
+// -------Proses Update Contact by ID Contact---------
+app.put("/contact/update/:id", validateContact(), async (req, res) => {
+  const id = req.params.id;
+  const contact = await findContact(id);
+
+  // check apakah lulus validasi sebelum UPDATE
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.render("page-contact-update", {
       layout: "layouts/main-layout.ejs",
       title: "Halaman Update Contact Form",
       cssLink: ["/css/page-add-contact.css", "/css/btn-add-button.css"],
+      errors: errors.array(),
       jsLink: ["/"],
+      inputData: req.body,
       contact,
     });
+  }
+  // Setelah Data Update Lolos dari Validasi Contact
+  const { nama, nohp, email } = req.body;
+  try {
+    await updateContact(id, { nama, nohp, email });
   } catch (err) {
     console.log(err);
   }
 });
-// // -------Proses Men-Delete Contact---------
+
+// -------Proses Men-Delete Contact (Menggunakan app.post)---------
 // app.post("/contact/delete/:id", async (req, res) => {
 //   try {
 //     await deleteContact(req.params.id);
@@ -151,6 +176,7 @@ app.get("/contact/update/:id", async (req, res) => {
 //   }
 // });
 
+// -------Proses Men-Delete Contact Menggunakan app.delete---------
 app.delete("/contact/delete/:id", async (req, res) => {
   try {
     const id = req.params.id;

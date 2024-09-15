@@ -63,9 +63,13 @@ async function deleteContact(id) {
   }
 }
 
-async function updateContact(id, update) {
+async function updateContact(id, updatedData) {
   const contacts = await loadFile();
-  const contact = await contacts.find((contact) => contact.id === id);
+  const contactIndex = await contacts.findIndex((contact) => contact.id === id);
+  if (contactIndex !== -1) {
+    contacts[contactIndex] = { ...contacts[contactIndex], ...updatedData };
+    console.log(contacts[contactIndex]);
+  }
 }
 
 module.exports = {
@@ -74,4 +78,5 @@ module.exports = {
   findContact,
   addContact,
   deleteContact,
+  updateContact,
 };
