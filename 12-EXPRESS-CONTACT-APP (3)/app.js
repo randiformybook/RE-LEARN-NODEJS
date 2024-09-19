@@ -141,7 +141,6 @@ app.get("/contact/update/:id", async (req, res) => {
 app.put("/contact/update/:id", validateContact(), async (req, res) => {
   const id = req.params.id;
   const contact = await findContact(id);
-
   // check apakah lulus validasi sebelum UPDATE
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
