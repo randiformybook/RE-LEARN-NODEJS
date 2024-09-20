@@ -1,0 +1,225 @@
+html {
+  height: 100%;
+}
+
+.login-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: #595959;
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+}
+.login-box .user-box label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #c0c0c0;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+.login-box form a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #03e9f4;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: 0.5s;
+  margin-top: 40px;
+  letter-spacing: 4px;
+}
+
+/* CSS ADD */
+.action-button-add,
+.action-button-reset {
+  font-weight: bold;
+  color: black;
+  font-size: 16px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.action-button-add:after,
+.action-button-reset:after {
+  content: "";
+  background-color: #c2c1b3;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+.action-button-reset {
+  margin-left: 10px;
+}
+.action-button-reset::after {
+  background-color: #7e7e75;
+}
+
+.action-button-add:hover:after,
+.action-button-reset:hover:after {
+  top: 0px;
+  left: 0px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+}
+
+/* Untuk memastikan label berada di atas ketika ada nilai atau input fokus */
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+/* Tambahkan aturan ini di bagian akhir CSS */
+.user-box input[readonly] {
+  pointer-events: none; /* Mencegah input dari bisa diklik */
+  color: #989898; /* Ubah warna teks menjadi abu-abu untuk menandakan input tidak bisa diedit */
+}
+
+/* Aturan ini memastikan label naik ke atas meskipun input readonly */
+.login-box .user-box input[readonly] ~ label {
+  top: -20px;
+  left: 0;
+  color: #03e9f4;
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
+  .action-button-add {
+    padding: 13px 50px 13px;
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px; /* Posisi di kanan atas */
+  border: none;
+  background-color: transparent; /* Background transparan */
+  color: #ccc; /* Warna icon */
+  font-size: 1.5rem; /* Ukuran icon */
+  cursor: pointer; /* Tampilan kursor saat hover */
+  transition: all 0.3s ease-in-out; /* Efek animasi saat hover */
+}
+
+.close-button:hover {
+  color: #888; /* Warna icon saat hover */
+  /* Menambahkan tulisan "Close" saat hover */
+  ::after {
+    content: "Close";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem; /* Ukuran tulisan */
+    color: #888; /* Warna tulisan */
+    opacity: 0; /* Awalnya tidak terlihat */
+    transition: opacity 0.3s ease-in-out;
+  }
+}
+
+.close-button:hover::after {
+  opacity: 1; /* Muncul saat hover */
+}
+
+/* CSS BACK */
+/* .action-button-back {
+  font-weight: bold;
+  color: black;
+  font-size: 16px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.action-button-back:after {
+  content: "";
+  background-color: #7e7e75;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.action-button-back:hover:after {
+  top: 0px;
+  left: 0px;
+} */
+
+@media (min-width: 768px) {
+  .action-button-back {
+    padding: 13px 50px 13px;
+  }
+}

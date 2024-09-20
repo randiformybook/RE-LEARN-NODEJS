@@ -1,0 +1,71 @@
+<div class="contact-detail-background">
+  <div class="contact-detail-container">
+    <div class="contact-detail-screen">
+      <div class="cd-screen-header">
+        <!-- <div class="cd-screen-header-left">
+          <div class="cd-screen-header-button close"></div>
+          <div class="cd-screen-header-button maximize"></div>
+          <div class="cd-screen-header-button minimize"></div>
+        </div> -->
+        <div class="cd-screen-header-right">
+          <div class="cd-screen-header-ellipsis"></div>
+          <div class="cd-screen-header-ellipsis"></div>
+          <div class="cd-screen-header-ellipsis"></div>
+        </div>
+      </div>
+      <% if (!contact.id) { %> <% console.log("error")%> <% }else{ %>
+      <div class="cd-screen-body">
+        <div class="cd-screen-body-item left">
+          <div class="app-title">
+            <span style="margin-bottom: 10px">CONTACT</span>
+            <span>KARYAWAN</span>
+          </div>
+        </div>
+        <div class="cd-screen-body-item">
+          <div class="app-form">
+            <div class="app-form-group">
+              <input
+                class="app-form-control"
+                placeholder="NAME"
+                value="<%= contact.nama %>"
+                readonly
+              />
+            </div>
+            <div class="app-form-group">
+              <input
+                class="app-form-control"
+                placeholder="EMAIL"
+                value="<%= contact.email %>"
+                readonly
+              />
+            </div>
+            <div class="app-form-group">
+              <input
+                class="app-form-control"
+                placeholder="CONTACT NO"
+                value="<%= contact.nohp %>"
+                readonly
+              />
+            </div>
+            <div class="app-form-group message">
+              <input
+                class="app-form-control"
+                value="<%= contact.id %>"
+                style="font-size: 30px; color: #80807b"
+                readonly
+              />
+            </div>
+            <div class="app-form-group buttons">
+              <!-- <button class="app-form-button">CANCEL</button> -->
+              <a href="/contact" class="app-form-button"><<< BACK</a>
+              <!-- <button class="app-form-button" formtarget="/contact.ejs">
+                <<< BACK
+              </button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
