@@ -3,7 +3,7 @@ const expressLayouts = require("express-ejs-layouts");
 const app = express();
 const { query, validationResult, body } = require("express-validator");
 const {
-  checkDir,
+  pool,
   loadFile,
   findContact,
   addContact,
@@ -164,18 +164,6 @@ app.put("/contact/update/:id", validateContact(), async (req, res) => {
     console.log(err);
   }
 });
-
-// -------Proses Men-Delete Contact (Menggunakan app.post)---------
-// app.post("/contact/delete/:id", async (req, res) => {
-//   try {
-//     await deleteContact(req.params.id);
-//     req.flash("delete_msg", "Kontak berhasil di Hapus");
-//     res.redirect("/contact");
-//   } catch (err) {
-//     console.error("Failed to delete contact:", err);
-//     res.status(500).send("Internal Server Error");
-//   }
-// });
 
 // -------Proses Men-Delete Contact Menggunakan app.delete---------
 app.delete("/contact/delete/:id", async (req, res) => {
