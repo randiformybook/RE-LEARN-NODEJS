@@ -1,10 +1,10 @@
 const mysql = require("mysql2/promise");
 
 const pool = mysql.createPool({
-  host: "",
-  user: "",
-  password: "",
-  database: "",
+  host: "127.0.0.1:3306",
+  user: "root",
+  password: "123456",
+  database: "contact_app",
 });
 
 async function loadFile() {
@@ -14,6 +14,7 @@ async function loadFile() {
 
 async function findContact(id) {
   const [rows] = await pool.query("SELECT * FROM contacts WHERE id = ?", [id]);
+  return rows[0] || null;
 }
 
 async function addContact(data) {

@@ -75,7 +75,6 @@ app.get("/about", (req, res) => {
 });
 // -------Contact Page Route---------
 app.get("/contact", async (req, res) => {
-  await checkDir();
   const contacts = await loadFile();
   res.render("contact", {
     layout: "layouts/main-layout.ejs",
@@ -183,14 +182,20 @@ app.get("/contact/:id", async (req, res) => {
   if (isNaN(req.params.id)) {
     return res.status(404).send("Contact not Found");
   }
-  const contact = await findContact(req.params.id);
-  res.render("page-contact-detail", {
-    layout: "layouts/main-layout.ejs",
-    title: "Halaman Detail Contact",
-    cssLink: ["/css/contact-detail.css"],
-    jsLink: ["/"],
-    contact,
-  });
+  const id = req.params.id;
+  const contact = await findContact(id);
+  console.log(contact.nama);
+  if (!contact) {
+    res.sendStatus(404);
+  } else {
+    res.render("page-contact-detail", {
+      layout: "layouts/main-layout.ejs",
+      title: "Halaman Detail Contact",
+      cssLink: ["/css/contact-detail.css"],
+      jsLink: ["/"],
+      contact,
+    });
+  }
 });
 
 // Apabila URL halaman tidak di temukan
